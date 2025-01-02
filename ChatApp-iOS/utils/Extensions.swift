@@ -68,6 +68,8 @@ extension UIImage {
     static let iconEdit = UIImage(systemName: "pencil")
     static let iconDelete = UIImage(systemName: "trash")
     static let iconAddImage = UIImage(systemName: "photo.badge.plus")
+    static let iconChat = UIImage(systemName: "bubble.left.and.bubble.right")
+    static let iconSearchUser = UIImage(systemName: "magnifyingglass")
     
     static var iconShop: UIImage? {
         UIDevice.current.systemVersion >= "16"

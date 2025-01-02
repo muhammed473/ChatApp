@@ -27,41 +27,58 @@ class SignInController: Controller<SignInViewModel, LoginNavigationController> {
         
         activateConstraints(
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-           // logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+          //  logoImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             
             emailTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 16),
-            emailTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            emailTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 6),
-            passwordTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
-            passwordTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 16),
+            passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             signInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
-            signInButton.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor),
-            signInButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
+            signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            signUpButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            signUpButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            signUpButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
+            signUpButton.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 16),
+            signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         )
         
     }
     
     
     override func customizeViews() {
+        logoImageView.backgroundColor = .blue
+        logoImageView.set(cornerRadius: 60)
+        
         emailTextField.placeholder = "Email"
         
         passwordTextField.placeholder = "Password"
         passwordTextField.isSecureTextEntry = true
         
         signInButton.setTitle("Sign In", for: .normal)
-        /// MARK : Action yazılacak...
+        signInButton.action = signInButtonClicked
     
         signUpButton.setTitle("SignUp", for: .normal)
-        /// MARK : Action yazılacak...
+        signUpButton.action = signUpButtonClicked
+    }
+    
+    
+    private func signInButtonClicked() {
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text
+        else {
+            return
+        }
         
+        viewModel.signIn(email: email, password: password) { userUid in
+            self.viewModel.show(message: "New screen go to past. \(userUid)", type: .success)
+        }
+    }
+    
+    
+    private func signUpButtonClicked() {
+        navController?.signInToSignUp()
     }
     
 }

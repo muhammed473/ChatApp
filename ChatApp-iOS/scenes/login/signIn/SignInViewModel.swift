@@ -7,6 +7,13 @@
 
 class SignInViewModel: ViewModel {
  
-    
-    
+    func  signIn(email: String, password: String, completion: Callback<String>?) {
+        guard !email.isEmpty, !password.isEmpty else {
+            return
+        }
+        
+        showLoading()
+        
+        AuthService.instance.signIn(email: email, password: password, completion: completion)
+    }
 }

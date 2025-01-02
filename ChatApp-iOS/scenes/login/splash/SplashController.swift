@@ -15,23 +15,23 @@ class SplashController: Controller<SplashViewModel, LoginNavigationController> {
         
         viewModel.showLoading()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: directPassageSignIn)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: checkCurrentUser)
     }
     
     
-  /*  private func checkCurrentUser() {
+    private func checkCurrentUser() {
         viewModel.hideLoading()
         
         if let currentUser = viewModel.currentUser {
-            navController?.leaveFromLogin(userType: currentUser.type)
+            navController?.leaveFromLogin()
             return
         }
         
         navController?.splashToSignIn()
-    } */
+    }
     
-    private func directPassageSignIn() {
+  /*  private func directPassageSignIn() {
         viewModel.hideLoading()
         navController?.splashToSignIn()
-    }
+    } */
 }

@@ -28,14 +28,16 @@ class LoginNavigationController: NavigationController {
     }
     
     
-   /* func signInToSignUp() {
+    func signInToSignUp() {
         let signUpController = SignUpController()
         pushViewController(signUpController, animated: true)
     }
     
     
-    func signUpToSignIn() {
-        popViewController(animated: true)
-    } */
+    func leaveFromLogin() {
+        let tabbarController = MainTabBarController()
+        tabbarController.modalPresentationStyle = .fullScreen
+        present(tabbarController, animated: true, completion: nil)
+    }
     
 }
