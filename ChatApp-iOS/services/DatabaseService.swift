@@ -34,6 +34,25 @@ struct DatabaseService: Service {
             
             completion?()
         }
+    }
+    
+    
+    func fetchUsers(completion: Callback<[User]?>?) {
+        guard (UserDefaultsService.instance.currentUser?.uid) != nil else {
+            show(message: "Please log in.", type: .error)
+            return
+        }
+        
+        db.collection("Users").getDocuments { snapshot, error in
+            if let error = error {
+                show(message: error.localizedDescription, type: .error)
+                return
+            }
+            
+            let users = ParserService.instance.parseToUsers(snapshot: snapshot)
+            completion?(users)
+        }
+        
         
     }
 }

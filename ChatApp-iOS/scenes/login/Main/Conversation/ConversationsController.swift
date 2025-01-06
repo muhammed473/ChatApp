@@ -12,14 +12,14 @@ class ConversationsController: Controller<ConversationViewModel, ConversationsNa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .blue
+        view.backgroundColor = .white
         setNavButton(icon: .iconProfile, onClicked: onClickedSearchUser)
         
     }
     
     
     private func onClickedSearchUser() {
-        print("Search User button is clicked.")
+        navController?.conversationToNewConversation()
     }
     
 }

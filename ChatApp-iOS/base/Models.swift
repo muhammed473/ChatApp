@@ -39,3 +39,10 @@ struct LastMessage: Codable {
     let text: String?
     let isRead: Bool?
 }
+
+
+struct SearchResult: Codable {
+    var uid: String?
+    let name: String?
+    let email: String?
+}

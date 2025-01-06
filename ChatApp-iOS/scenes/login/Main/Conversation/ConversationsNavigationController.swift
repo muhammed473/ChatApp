@@ -15,4 +15,17 @@ class ConversationsNavigationController: NavigationController {
         let rootController = ConversationsController()
         viewControllers = [rootController]
     }
+    
+    
+    func conversationToNewConversation() {
+        let controller = NewConversationsController()
+        pushViewController(controller, animated: true)
+    }
+    
+    func newConversationToChatController(selectedUser: SearchResult) {
+        let controller = ChatViewController()
+        controller.modalPresentationStyle = .fullScreen
+        controller.viewModel.selectedUser = selectedUser
+        present(controller, animated: true)
+    }
 }
